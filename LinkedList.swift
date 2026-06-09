@@ -10,7 +10,6 @@ class Node {
     }
 }
 
-// nil <- 1 <-> 2 <-> 3 <-> 4 <-> 5 -> nil
 let node1 = Node(value: 1)
 let node2 = Node(prev: node1, value: 2)
 let node3 = Node(prev: node2, value: 3)
@@ -22,8 +21,18 @@ node2.next = node3
 node3.next = node4
 node4.next = node5
 
-var current: Node? = node1
-while let node = current {
-    print(node.value)
-    current = node.next
+var newHead = Node(value: 0)
+node1.prev = newHead
+newHead.next = node1
+
+var current: Node? = newHead
+
+var newTail = Node(value: 6)
+
+while let next = current!.next {
+    print(next.value)
+    current = next
 }
+
+current!.next = newTail
+newTail.prev = current
